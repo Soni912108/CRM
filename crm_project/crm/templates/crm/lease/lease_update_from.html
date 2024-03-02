@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Lease</title>
+</head>
+<body>
+    <h2>Update Lease</h2>
+    <form method="post" action="{% url 'crm:update_lease' lease_id=leasing.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value=" Update Lease" class="btn btn-primary">
+    </form>
+    <a href="{% url 'crm:leasing_list' %}" class="btn btn-secondary">Cancel</a>
+</body>
+</html>

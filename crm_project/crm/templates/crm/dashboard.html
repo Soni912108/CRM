@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <title>Dashboard</title>
+</head>
+<body>
+    <h5>crm page where you will find your links to other pages and a dashboard with data analytics</h5>
+    <li>
+        <!-- linking the views as functions to load templates(app:view) -->
+        <ul><a href="{% url 'crm:show_all_cars' %}">Car List</a></ul>
+        <ul><a href="{% url 'crm:customer_details' %}">Customer List</a></ul>
+        <ul><a href="{% url 'crm:transaction_list' %}">Transaction List</a></ul>
+        <ul><a href="{% url 'crm:leasing_list' %}">Lease List</a></ul>
+    </li>
+    <button><a href="{% url 'accounts:logout_view' %}">Logout</a></button>
+</body>
+</html>

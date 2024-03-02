@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lease a Car</title>
+</head>
+<body>
+    <!-- transaction_form.html -->
+    <form method="post" action="{% url 'crm:add_lease' %}">
+        {% csrf_token %}
+
+        {{ lease_form.customer.label_tag }}
+        {{ lease_form.customer }}
+
+        {{ lease_form.car.label_tag }}
+        {{ lease_form.car }}
+
+        <!-- Display car details -->
+        <p>Model: <span id="car-model"></span></p>
+        <p>Year: <span id="car-year"></span></p>
+        <p>Color: <span id="car-color"></span></p>
+        <p>Engine: <span id="car-engine"></span></p>
+        <p>Total Available Number: <span id="car-total_available_number"></span></p>
+
+        {{ lease_form.lease_start_date.label_tag }}
+        {{ lease_form.lease_start_date }}
+
+        {{ lease_form.lease_end_date.label_tag }}
+        {{ lease_form.lease_end_date }}
+
+        <!-- Add the new field for the number of cars -->
+        {{ lease_form.number_of_cars.label_tag }}
+        {{ lease_form.number_of_cars }}
+
+        <button type="submit" id="add-lease-btn">Add Lease</button>
+    </form>
+    <a href="{% url 'crm:leasing_list' %}" class="btn btn-secondary">Cancel</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // Function to fetch car details and update the page
+        function fetchCarDetails(selectedID) {
+            $.ajax({
+                url: '/crm/get_car_details/',
+                data: {'id': selectedID},
+                success: function (data) {
+                    // Update the elements on your page with the fetched data
+                    $('#car-model').text(data.model);
+                    $('#car-year').text(data.year);
+                    $('#car-color').text(data.color);
+                    $('#car-engine').text(data.engine);
+                    $('#car-total_available_number').text(data.total_available_number);
+                },
+                error: function (error) {
+                    console.error('Error fetching car details:', error.responseText);
+                }
+            });
+        }
+    
+        // Attach an event listener for the change event on the car dropdown
+        $('#{{ lease_form.car.id_for_label }}').change(function () {
+            // Get the selected value from the car dropdown
+            var selectedID = $(this).val();
+    
+            if (selectedID) {
+                // Fetch car details and update the page
+                fetchCarDetails(selectedID);
+            }
+        });
+    
+        // Function to handle the "Add Transaction" button click
+        function handleAddTransaction() {
+            var selectedID = $('#{{ lease_form.car.id_for_label }}').val();
+            var number_of_lease = $('#{{ lease_form.number_of_cars.id_for_label }}').val();
+            var total_available_number = parseInt($('#car-total_available_number').text());
+
+            // Check if the number of cars selected is greater than the available number
+            if (parseInt(number_of_lease) > total_available_number) {
+                // Display an error message or take appropriate action
+                alert('Please choose a number less than or equal to the available quantity.');
+                return; // Prevent further execution
+            }
+
+            // Second AJAX call to fetch additional data or perform other actions
+            $.ajax({
+                url: '/crm/lease/',
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Include the CSRF token in the headers
+                },
+                data: {'id': selectedID, 'number_of_lease': number_of_lease},
+                success: function (response) {
+                    // Handle success, if needed
+                    console.log('Sold successfully:', response);
+                },
+                error: function (error) {
+                    console.error('Error leasing car:', error.responseText);
+                }
+            });
+        }
+
+    
+        // Attach an event listener for the "Add Transaction" button click
+        $('#add-lease-btn').click(function () {
+            // Trigger the handleAddTransaction function on button click
+            handleAddTransaction();
+        });
+    
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+    
+        // Trigger the change event to fetch initial data
+        $('#{{ lease_form.car.id_for_label }}').change();
+    </script>
+    
+</body>
+</html>

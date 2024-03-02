@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer</title>
+</head>
+<body>
+    <h2>Add a new Customer</h2>
+    <form method="post" action="{% url 'crm:add_customer' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Customer</button>
+    </form>
+    <a href="{% url 'crm:customer_details' %}" class="btn btn-secondary">Cancel</a>
+</body>
+</html>
