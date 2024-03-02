@@ -1,4 +1,4 @@
-****CRM****
+****CAR RENTAL****
 
 Introduction
 
@@ -28,6 +28,7 @@ pip (package installer for Python): It usually comes bundled with Python. Verify
 1.Clone the Repository:
 
 git clone https://github.com/Soni912108/CRM.git
+
 cd <crm_project>
 
 2.Create a Virtual Environment (Recommended):
@@ -35,7 +36,9 @@ cd <crm_project>
 A virtual environment helps isolate project dependencies from your system-wide Python installations:
 
 python -m venv venv(or a name you like)  # For Python 3.3+
+
 source venv/bin/activate  # Activate the virtual environment (Linux/macOS)
+
 venv\Scripts\activate.bat  # Activate on Windows
 
 3.Install Dependencies:
@@ -50,17 +53,21 @@ pip install -r requirements.txt
 1.Start the development server:
 
 python manage.py runserver
+
 This will typically start the server at http://127.0.0.1:8000/ by default. You can access your Django application in your web browser at this URL.
 
 ****Creating an Admin User****
 
 1.Open a terminal/command prompt.
+
 2.Navigate to your project directory:
+
 cd <crm_project>
 
 3.Run the following command to create an admin user:
 
 python manage.py createsuperuser
+
 Follow the prompts to enter a username, email address, and password for your admin account.
 
 
@@ -69,8 +76,10 @@ Follow the prompts to enter a username, email address, and password for your adm
 When you modify your models (e.g., adding a new field), Django needs to update the database schema to reflect those changes. Use the following commands:
 
 1.Create database migrations:
+
 python manage.py makemigrations
 
 2.Apply migrations to the database:
+
 python manage.py migrate
 
