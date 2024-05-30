@@ -1,7 +1,18 @@
 
-##  CAR RENTAL
+## CAR RENTAL
 
-**Introduction**
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Database Migrations](#database-migrations)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+
+##  Introduction
 
 This project is a Django web application designed to streamline car rental business operations and enhance customer relationships. It provides a centralized platform for managing:
 
@@ -24,7 +35,7 @@ Python (version 3.11 or later): You can download it from the official Python web
 pip (package installer for Python): It usually comes bundled with Python. Verify its presence using python -m pip --version in your terminal.
 
 
-## Setting Up the Project
+## Installation
 
 1.Clone the Repository:
 
@@ -75,7 +86,7 @@ When you modify your models (e.g., adding a new field), Django needs to update t
 
     python manage.py migrate
 
-## Running the Development Server
+## Usage
 
 1.Start the development server:
 
@@ -84,4 +95,16 @@ When you modify your models (e.g., adding a new field), Django needs to update t
 This will typically start the server at http://127.0.0.1:8000/ by default. 
 You can access your Django application in your web browser at this URL and the admin dashboard to manage the project database and more at http://127.0.0.1:8000/admin
 
+##  Contributing
+**Contributions are welcome! Please follow these steps:**
 
+Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes.
+Commit your changes (git commit -m 'Add some feature').
+Push to the branch (git push origin feature-branch).
+Open a pull request.
+
+
+##  License
+**This project is licensed under the MIT License. See the LICENSE file for more details.**
